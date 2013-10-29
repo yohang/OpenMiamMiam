@@ -48,10 +48,10 @@ parameters:
     open_miam_miam.form.type.super_article.class:                         'Isics\Bundle\OpenMiamMiamBundle\Form\Type\SuperArticleType'
     open_miam_miam.form.type.cart_item.class:                             'Isics\Bundle\OpenMiamMiamBundle\Form\Type\CartItemType'
     open_miam_miam.form.type.cart.class:                                  'Isics\Bundle\OpenMiamMiamBundle\Form\Type\CartType'
-    open_miam_miam.form.type.add_rows_sales_order.class:                  'Isics\Bundle\OpenMiamMiamBundle\Form\Type\AddRowsToSalesOrderType'
     open_miam_miam.form.type.artificial_product.class:                    'Isics\Bundle\OpenMiamMiamBundle\Form\Type\ArtificialProductType'
     open_miam_miam.form.type.payment.class:                               'Isics\Bundle\OpenMiamMiamBundle\Form\Type\PaymentType'
     open_miam_miam.form.type.payment_allocation.class:                    'Isics\Bundle\OpenMiamMiamBundle\Form\Type\PaymentAllocationType'
+    open_miam_miam.form.type.products_filter.class:                       'Isics\Bundle\OpenMiamMiamBundle\Form\Type\ProductsFilterType'
 
     # Models
     open_miam_miam.sales_order_statistics.class:    'Isics\Bundle\OpenMiamMiamBundle\Model\SalesOrder\Statistics'
@@ -59,6 +59,9 @@ parameters:
     open_miam_miam.sales_orders_pdf.class:          'Isics\Bundle\OpenMiamMiamBundle\Model\SalesOrder\SalesOrdersPdf'
     open_miam_miam.producer_sales_orders_pdf.class: 'Isics\Bundle\OpenMiamMiamBundle\Model\SalesOrder\ProducerSalesOrdersPdf'
     open_miam_miam.products_to_prepare_pdf.class:   'Isics\Bundle\OpenMiamMiamBundle\Model\SalesOrder\ProductsToPreparePdf'
+    open_miam_miam.mailer.class:                    'Isics\Bundle\OpenMiamMiamBundle\Model\Mailer'
+
+
 
 services:
     # Validators
@@ -188,11 +191,6 @@ services:
         tags:
             - { name: form.type, alias: open_miam_miam_producer_sales_order }
 
-    open_miam_miam.form.type.add_rows_sales_order:
-        class: %open_miam_miam.form.type.add_rows_sales_order.class%
-        tags:
-            - { name: form.type, alias: open_miam_miam_sales_add_rows_order }
-
     open_miam_miam.form.type.artificial_product:
         class: %open_miam_miam.form.type.artificial_product.class%
         tags:
@@ -208,6 +206,11 @@ services:
         tags:
             - { name: form.type, alias: open_miam_miam_payment }
 
+    open_miam_miam.form.type.products_filter:
+        class: %open_miam_miam.form.type.products_filter.class%
+        tags:
+            - { name: form.type, alias: open_miam_miam_products_filter }
+
 
 
     # Twig extensions
@@ -219,6 +222,7 @@ services:
             - @open_miam_miam.product_manager
             - @open_miam_miam.producer_manager
             - @open_miam_miam.consumer_manager
+            - @open_miam_miam.branch_occurrence_manager
         tags:
             - { name: twig.extension }
 
@@ -294,7 +298,7 @@ services:
 
     open_miam_miam.sales_order_manager:
         class: %open_miam_miam.sales_order_manager.class%
-        arguments: [%open_miam_miam.order%, @doctrine.orm.entity_manager, @open_miam_miam.activity_manager, @mailer, %open_miam_miam.mailer%, @templating, @translator]
+        arguments: [%open_miam_miam.order%, @doctrine.orm.entity_manager, @open_miam_miam.activity_manager, @open_miam_miam.mailer]
 
     open_miam_miam.producer_sales_order_manager:
         class: %open_miam_miam.producer_sales_order_manager.class%
@@ -330,3 +334,7 @@ services:
         class:     %open_miam_miam.products_to_prepare_pdf.class%
         arguments: [%open_miam_miam.product%, @open_miam_miam.tcpdf, @templating]
         scope:     prototype
+
+    open_miam_miam.mailer:
+        class:     %open_miam_miam.mailer.class%
+        arguments: [@mailer, %open_miam_miam.mailer%, @templating, @translator]

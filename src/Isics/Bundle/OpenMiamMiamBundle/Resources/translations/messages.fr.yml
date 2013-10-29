@@ -126,6 +126,16 @@ availability.out_of_stock:    "Trop tard!"
 availability.producer_absent: "Producteur absent"
 availability.available_at:    "Dispo le %date%"
 
+# Availability for backend
+backend.availability:                 "Dispo"
+backend.availability.unavailable:     "Indisponible"
+backend.availability.available:       "Dispo"
+backend.availability.in_stock:        "%stock% en stock"
+backend.availability.out_of_stock:    "Plus de stock"
+backend.availability.producer_absent: "Producteur absent"
+backend.availability.available_at:    "Dispo le %date%"
+
+
 
 # News
 news:              "Actualité"
@@ -140,7 +150,7 @@ admin.save:                  "Enregistrer"
 admin.return:                "Retourner à la liste"
 admin.activity_stream.title: "Historique"
 admin.add:                   "Ajouter"
-
+admin.close:                 "Fermer"
 
 
 # Admin login
@@ -277,11 +287,14 @@ admin.association.sales_orders.form.total:                            "Total"
 admin.association.sales_orders.form.left_to_pay:                      "A régler"
 admin.association.sales_orders.form.sales_order_row.create:           "Ajouter des produits"
 admin.association.sales_orders.form.sales_order_row.delete:           "Supprimer la ligne de commande"
-admin.association.sales_orders.form.add_rows.title:                   "Ajouter des produits à la commande %ref%"
-admin.association.sales_orders.form.add_rows.name:                    "Nom"
-admin.association.sales_orders.form.add_rows.price:                   "Prix"
-admin.association.sales_orders.form.add_rows.return:                  "Retour à la commande"
-admin.association.sales_orders.form.add_rows.producer:                "Producteur"
+admin.association.sales_orders.add_products.title:                    "Ajouter des produits"
+admin.association.sales_orders.add_products.name:                     "Nom"
+admin.association.sales_orders.add_products.price:                    "Prix"
+admin.association.sales_orders.add_products.return:                   "Retour à la commande"
+admin.association.sales_orders.add_products.producer:                 "Producteur"
+admin.association.sales_orders.add_products.availability:             "Dispo"
+admin.association.sales_orders.add_products.add:                      "Ajouter"
+admin.association.sales_orders.add_products.no_product:               "Aucun produit trouvé."
 admin.association.sales_orders.payment.title:                         "Régler la commande %ref%"
 admin.association.sales_orders.payment.new_payment:                   "Nouveau règlement"
 admin.association.sales_orders.payment.left_to_pay:                   "Reste à régler"
@@ -357,7 +370,6 @@ admin.association.articles.message.updated:       "L'article a bien été mis à
 admin.association.articles.message.deleted:       "L'article a bien été supprimé."
 admin.association.articles.delete_dialog.content: "Êtes-vous vraiment certain de vouloir supprimer cet article ?"
 
-
 # Admin / Producer / Menu
 admin.producer.menu.dashboard:      "Tableau de bord"
 admin.producer.menu.orders:         "Commandes"
@@ -421,6 +433,7 @@ admin.producer.sales_orders.message.payment_added:              "Le règlement a
 admin.producer.sales_orders.message.payment_allocated:          "Le règlement a bien été affecté."
 admin.producer.sales_orders.message.payment_allocation_deleted: "Le règlement a bien été désaffecté."
 admin.producer.sales_orders.message.updated:                    "La commande a bien été mise à jour."
+admin.producer.sales_orders.message.product_added:              "Le produit a bien été ajouté à la commande"
 
 admin.producer.sales_orders.delete_dialog.sales_order_row.content: "Êtes-vous vraiment certain de vouloir supprimer cette ligne de commande ?"
 
@@ -534,7 +547,6 @@ admin.delete_dialog.title:   "Attention !"
 admin.delete_dialog.content: "Êtes-vous sûr de vouloir supprimer cet élément ?"
 admin.delete_dialog.cancel:  "NON"
 admin.delete_dialog.confirm: "OUI, supprimer"
-
 
 # PDFs
 pdf.sales_order.title:              "Commande %ref%"

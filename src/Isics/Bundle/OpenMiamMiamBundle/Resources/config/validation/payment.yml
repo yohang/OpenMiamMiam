@@ -4,8 +4,8 @@ Isics\Bundle\OpenMiamMiamBundle\Entity\Payment:
     properties:
         amount:
             - NotNull: ~
-            - GreaterThan:
-                value: 0
+            - Range:
+                min: 0
         rest:
             - NotNull: ~
         date:
@@ -25,8 +25,8 @@ Isics\Bundle\OpenMiamMiamBundle\Entity\PaymentAllocation:
     properties:
         amount:
             - NotNull: ~
-            - GreaterThan:
-                value: 0
+            - Range:
+                min: 0
         date:
             - NotNull: ~
             - Date: ~
