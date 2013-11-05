@@ -6,6 +6,9 @@
  # with this source code in the file LICENSE.
  #}
 {% import "IsicsOpenMiamMiamBundle:Macro:product.html.twig" as product_macro %}
+
+{% set availabilityInfos = get_product_availability(order.branchOccurrence, product) %}
+
 <tr id="product-{{ product.id }}"{% if not availabilityInfos.isAvailable %} class="unavailable"{% endif %}>
     <td>{{ product.producer.name }}</td>
     <td>{{ product.name }}</td>

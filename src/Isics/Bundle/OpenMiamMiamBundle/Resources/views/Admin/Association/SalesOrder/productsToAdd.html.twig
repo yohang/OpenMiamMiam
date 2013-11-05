@@ -6,7 +6,6 @@
  # with this source code in the file LICENSE.
  #}
 {% for product in products %}
-    {% set availabilityInfos = get_product_availability(order.branchOccurrence, product) %}
     {% include 'IsicsOpenMiamMiamBundle:Admin\\Association\\SalesOrder:productToAdd.html.twig' %}
 {% else %}
     <tr>
