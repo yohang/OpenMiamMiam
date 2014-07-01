@@ -11,17 +11,14 @@
 
 namespace Isics\Bundle\OpenMiamMiamBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Isics\Bundle\OpenMiamMiamBundle\Entity\Producer;
-use Isics\Bundle\OpenMiamMiamBundle\Entity\Product;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Isics\OpenMiamMiamBundle\Entity\SalesOrderRow
  *
  * @ORM\Table(name="sales_order_row")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Isics\Bundle\OpenMiamMiamBundle\Entity\Repository\SalesOrderRowRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class SalesOrderRow

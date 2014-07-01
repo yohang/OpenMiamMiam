@@ -11,8 +11,9 @@
 
 namespace Isics\Bundle\OpenMiamMiamBundle\Controller\Admin\Producer;
 
-use Isics\Bundle\OpenMiamMiamBundle\Controller\Admin\Producer\BaseController;
 use Isics\Bundle\OpenMiamMiamBundle\Entity\Producer;
+use Isics\Bundle\OpenMiamMiamBundle\Model\SalesOrder\ProducerBranchSalesOrderRowCollection;
+use Isics\Bundle\OpenMiamMiamBundle\Model\SalesOrder\ProducerSalesOrderRowCollection;
 use Symfony\Component\HttpFoundation\Request;
 
 class GeneralController extends BaseController
@@ -79,5 +80,23 @@ class GeneralController extends BaseController
             'form' => $form->createView(),
             'producer' => $producer
         ));
+    }
+
+    /**
+     * @param Producer $producer
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function displayTurnoverGraphAction(Producer $producer)
+    {
+        $salesOrderRows = $this->getDoctrine()->getRepository('IsicsOpenMiamMiamBundle:SalesOrderRow')
+            ->findByProducerAfterDate($producer, new \DateTime('-1 year'));
+
+        return $this->render(
+            'IsicsOpenMiamMiamBundle:Admin\Producer:displayTurnoverGraph.html.twig',
+            array(
+                'graph_data' => (new ProducerSalesOrderRowCollection($producer, $salesOrderRows))->getChartData()
+            )
+        );
     }
 }
